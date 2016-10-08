@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace CharitaPoll.Controllers
 {
@@ -41,7 +42,14 @@ namespace CharitaPoll.Controllers
             return Ok(dbuser);
         }
 
-     
+        [HttpGet]
+        [Route("api/Users/{UserId}/Answers")]
+        public IEnumerable<Answer> getAnswersByUser(int UserId)
+        {
+            return db.Answers.Where(o => o.UserId == UserId);
+        }
+
+
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]

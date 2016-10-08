@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace CharitaPoll.Controllers
 {

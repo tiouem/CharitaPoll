@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace CharitaPoll.Controllers
 {
@@ -23,7 +24,7 @@ namespace CharitaPoll.Controllers
             return db.Surveys;
         }
         [HttpGet]
-        [Route("api/Surveys/{SurveyId)/Polls")]
+        [Route("api/Surveys/{SurveyId}/Polls")]
         public IEnumerable<Poll> GetPollsBysurvey(int SurveyId)
         {
             return db.Polls.Where(o => o.SurveyId == SurveyId);

@@ -88,6 +88,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -225,6 +226,14 @@
     <Compile Include="Migrations\201610081343122_3.Designer.cs">
       <DependentUpon>201610081343122_3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610081549285_4.cs" />
+    <Compile Include="Migrations\201610081549285_4.Designer.cs">
+      <DependentUpon>201610081549285_4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610081751383_6.cs" />
+    <Compile Include="Migrations\201610081751383_6.Designer.cs">
+      <DependentUpon>201610081751383_6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\Charity.cs" />
@@ -274,7 +283,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -317,6 +328,15 @@
     <EmbeddedResource Include="Migrations\201610081343122_3.resx">
       <DependentUpon>201610081343122_3.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610081549285_4.resx">
+      <DependentUpon>201610081549285_4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610081751383_6.resx">
+      <DependentUpon>201610081751383_6.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
