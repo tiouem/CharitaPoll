@@ -7,53 +7,55 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
 
 namespace CharitaPoll.Controllers
 {
-    
-    public class PollsController : ApiController
+    public class SurveysController : ApiController
     {
         private Model1 db = new Model1();
 
-        // GET: api/Polls
-        public IQueryable<Poll> GetPolls()
+        // GET: api/Surveys
+        public IQueryable<Survey> GetSurveys()
         {
-            return db.Polls;
+            return db.Surveys;
         }
-
-        
-        // GET: api/Polls/5
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult GetPoll(int id)
+        [HttpGet]
+        [Route("api/Surveys/{SurveyId)/Polls")]
+        public IEnumerable<Poll> GetPollsBysurvey(int SurveyId)
         {
-            Poll poll = db.Polls.Find(id);
-            if (poll == null)
+            return db.Polls.Where(o => o.SurveyId == SurveyId);
+        }
+        // GET: api/Surveys/5
+        [ResponseType(typeof(Survey))]
+        public IHttpActionResult GetSurvey(int id)
+        {
+            Survey survey = db.Surveys.Find(id);
+            if (survey == null)
             {
                 return NotFound();
             }
 
-            return Ok(poll);
+            return Ok(survey);
         }
 
-        // PUT: api/Polls/5
+        // PUT: api/Surveys/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPoll(int id, Poll poll)
+        public IHttpActionResult PutSurvey(int id, Survey survey)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != poll.PollId)
+            if (id != survey.SurveyId)
             {
                 return BadRequest();
             }
 
-            db.Entry(poll).State = EntityState.Modified;
+            db.Entry(survey).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +63,7 @@ namespace CharitaPoll.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PollExists(id))
+                if (!SurveyExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +76,35 @@ namespace CharitaPoll.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Polls
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult PostPoll(Poll poll)
+        // POST: api/Surveys
+        [ResponseType(typeof(Survey))]
+        public IHttpActionResult PostSurvey(Survey survey)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Polls.Add(poll);
+            db.Surveys.Add(survey);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = poll.PollId }, poll);
+            return CreatedAtRoute("DefaultApi", new { id = survey.SurveyId }, survey);
         }
 
-        // DELETE: api/Polls/5
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult DeletePoll(int id)
+        // DELETE: api/Surveys/5
+        [ResponseType(typeof(Survey))]
+        public IHttpActionResult DeleteSurvey(int id)
         {
-            Poll poll = db.Polls.Find(id);
-            if (poll == null)
+            Survey survey = db.Surveys.Find(id);
+            if (survey == null)
             {
                 return NotFound();
             }
 
-            db.Polls.Remove(poll);
+            db.Surveys.Remove(survey);
             db.SaveChanges();
 
-            return Ok(poll);
+            return Ok(survey);
         }
 
         protected override void Dispose(bool disposing)
@@ -114,9 +116,9 @@ namespace CharitaPoll.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PollExists(int id)
+        private bool SurveyExists(int id)
         {
-            return db.Polls.Count(e => e.PollId == id) > 0;
+            return db.Surveys.Count(e => e.SurveyId == id) > 0;
         }
     }
 }

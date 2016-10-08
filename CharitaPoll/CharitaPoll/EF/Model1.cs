@@ -22,6 +22,10 @@ namespace CharitaPoll.EF
         public DbSet<Charity> Charities { get; set; }
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Answer> Answers { get; set; }
+
+        public System.Data.Entity.DbSet<CharitaPoll.Models.Company> Companies { get; set; }
+
+        public System.Data.Entity.DbSet<CharitaPoll.Models.Survey> Surveys { get; set; }
         // Add a DbSet for each entity type that you want to include in your model. For more information 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 

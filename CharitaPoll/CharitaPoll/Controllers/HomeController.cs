@@ -15,19 +15,7 @@ namespace CharitaPoll.Controllers
     {
         public ActionResult Index()
         {
-            var Model1 = new Model1();
-            Model1.Users.AddOrUpdate(
-                new User()
-                {
-                    FirstName = "tomas",
-                    LastName = "vit",
-                    Username = "tomas",
-                    Password = "Password",
-                    Country =  "Czech",
-                    DateCreated = DateTime.UtcNow,
-                    Gender = "male"
-                }
-                );
+            
             ViewBag.Title = "Home Page";
 
             return View();

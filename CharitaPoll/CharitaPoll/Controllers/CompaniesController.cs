@@ -7,53 +7,57 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
 
 namespace CharitaPoll.Controllers
 {
-    
-    public class PollsController : ApiController
+    public class CompaniesController : ApiController
     {
         private Model1 db = new Model1();
 
-        // GET: api/Polls
-        public IQueryable<Poll> GetPolls()
+        // GET: api/Companies
+        public IQueryable<Company> GetCompanies()
         {
-            return db.Polls;
+            return db.Companies;
         }
 
-        
-        // GET: api/Polls/5
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult GetPoll(int id)
+        [HttpGet]
+        [Route("api/Companies/{CompanyId}/Surveys")]
+        public IEnumerable<Survey> GetSurveysByCompany(int CompanyId)
         {
-            Poll poll = db.Polls.Find(id);
-            if (poll == null)
+            return db.Surveys.Where(o => o.CompanyId == CompanyId);
+        }
+
+        // GET: api/Companies/5
+        [ResponseType(typeof(Company))]
+        public IHttpActionResult GetCompany(int id)
+        {
+            Company company = db.Companies.Find(id);
+            if (company == null)
             {
                 return NotFound();
             }
 
-            return Ok(poll);
+            return Ok(company);
         }
 
-        // PUT: api/Polls/5
+        // PUT: api/Companies/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutPoll(int id, Poll poll)
+        public IHttpActionResult PutCompany(int id, Company company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != poll.PollId)
+            if (id != company.CompanyId)
             {
                 return BadRequest();
             }
 
-            db.Entry(poll).State = EntityState.Modified;
+            db.Entry(company).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +65,7 @@ namespace CharitaPoll.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PollExists(id))
+                if (!CompanyExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +78,35 @@ namespace CharitaPoll.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Polls
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult PostPoll(Poll poll)
+        // POST: api/Companies
+        [ResponseType(typeof(Company))]
+        public IHttpActionResult PostCompany(Company company)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Polls.Add(poll);
+            db.Companies.Add(company);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = poll.PollId }, poll);
+            return CreatedAtRoute("DefaultApi", new { id = company.CompanyId }, company);
         }
 
-        // DELETE: api/Polls/5
-        [ResponseType(typeof(Poll))]
-        public IHttpActionResult DeletePoll(int id)
+        // DELETE: api/Companies/5
+        [ResponseType(typeof(Company))]
+        public IHttpActionResult DeleteCompany(int id)
         {
-            Poll poll = db.Polls.Find(id);
-            if (poll == null)
+            Company company = db.Companies.Find(id);
+            if (company == null)
             {
                 return NotFound();
             }
 
-            db.Polls.Remove(poll);
+            db.Companies.Remove(company);
             db.SaveChanges();
 
-            return Ok(poll);
+            return Ok(company);
         }
 
         protected override void Dispose(bool disposing)
@@ -114,9 +118,9 @@ namespace CharitaPoll.Controllers
             base.Dispose(disposing);
         }
 
-        private bool PollExists(int id)
+        private bool CompanyExists(int id)
         {
-            return db.Polls.Count(e => e.PollId == id) > 0;
+            return db.Companies.Count(e => e.CompanyId == id) > 0;
         }
     }
 }
