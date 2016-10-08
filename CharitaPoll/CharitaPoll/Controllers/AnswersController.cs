@@ -7,12 +7,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using CharitaPoll.EF;
 using CharitaPoll.Models;
 
 namespace CharitaPoll.Controllers
 {
+    
     public class AnswersController : ApiController
     {
         private Model1 db = new Model1();
