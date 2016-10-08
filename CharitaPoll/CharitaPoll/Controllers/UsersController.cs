@@ -23,6 +23,21 @@ namespace CharitaPoll.Controllers
             return db.Users;
         }
 
+        [HttpPost]
+        [Route("api/Users/Login")]
+        public IHttpActionResult Login([FromBody] User user)
+        {
+            if (user.Username.Equals(string.Empty) || user.Password.Equals(string.Empty))
+            {
+                return BadRequest();
+            }
+            var dbuser = db.Users.Where(e => e.Username == user.Username && e.Password == user.Password).FirstOrDefaultAsync();
+            if (dbuser == null)
+            {
+                return NotFound();
+            }
+            return Ok(dbuser);
+        }
         
         // GET: api/Users/5
         [ResponseType(typeof(User))]
