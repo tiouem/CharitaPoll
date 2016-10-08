@@ -38,7 +38,9 @@ namespace CharitaPoll.Controllers
             }
             return Ok(dbuser);
         }
-        
+
+     
+
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(int id)

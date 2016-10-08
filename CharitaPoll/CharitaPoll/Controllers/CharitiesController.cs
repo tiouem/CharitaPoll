@@ -23,6 +23,12 @@ namespace CharitaPoll.Controllers
             return db.Charities;
         }
 
+        [HttpGet]
+        [Route("api/Charities/{CharityId}/Polls")]
+        public IQueryable<Poll> GetPollsByCharity(int CharityId)
+        {
+            return db.Polls.Where(o => o.CharityId == CharityId);        
+        }
         // GET: api/Charities/5
         [ResponseType(typeof(Charity))]
         public IHttpActionResult GetCharity(int id)

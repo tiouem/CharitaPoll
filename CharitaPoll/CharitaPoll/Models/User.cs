@@ -18,7 +18,6 @@ namespace CharitaPoll.Models
         public DateTime? DateOfBirth { get; set; }
         public string Country { get; set; }
 
-        public List<Poll> Polls { get; set; }
         public List<Answer> Answers { get; set; }
     }
 }
