@@ -12,8 +12,10 @@ namespace CharitaPoll.Models
 
 
         public int CompanyId { get; set; }
+        public int CharityId { get; set; }
 
         public virtual Company Company { get; set; }
+        public virtual Charity Charity { get; set; }
         public virtual List<Poll> Polls { get; set; }
     }
 }

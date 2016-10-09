@@ -10,6 +10,7 @@ namespace CharitaPoll.Models
         public int CharityId { get; set; }
         public string Name { get; set; }
 
-        public List<Poll> Polls { get; set; }
+        public virtual List<Survey> Surveys { get; set; }
+        public virtual List<Poll> Polls { get; set; }
     }
 }
